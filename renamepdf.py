@@ -10,22 +10,22 @@ def rename():
     for filename in filenames:
         with open(filename, 'rb') as file:
             pdf_reader = PdfFileReader(file)
-            pdf_tile = pdf_reader.getDocumentInfo().title
-        if ':' in pdf_tile:
-            pdf_tile = pdf_tile.replace(':', '：')
-        if '?' in pdf_tile:
-            pdf_tile = pdf_tile.replace('?', '？')
+            pdf_title = pdf_reader.getDocumentInfo().title
+        if ':' in pdf_title:
+            pdf_title = pdf_title.replace(':', '：')
+        if '?' in pdf_title:
+            pdf_title = pdf_title.replace('?', '？')
         file_path, filename_l = os.path.split(filename)
         try:
-            if file_path == f'{pdf_tile}.pdf':
+            if file_path == f'{pdf_title}.pdf':
                 continue
-            os.rename(filename, os.path.join(file_path, f'{pdf_tile}.pdf'))
-            print(pdf_tile)
+            os.rename(filename, os.path.join(file_path, f'{pdf_title}.pdf'))
+            print(pdf_title)
         except:     #--- filename includes unexpected char
             with open(f'{file_path}/Nold.txt', 'a') as file:
                 file.write(f'{filename_l}\n')
             with open(f'{file_path}/Nnew.txt', 'a') as file:
-                file.write(f'{pdf_tile}\n')
+                file.write(f'{pdf_title}\n')
         
 if __name__ == '__main__':
     rename()
